@@ -170,7 +170,9 @@ WHERE (land_area_sq_mi_2016 > 400 AND population_estimate_2018 <= 2000000) OR
       in 2010.
 */
 
--- your query here
+SELECT city, population_estimate_2018, population_census_2010
+FROM cities
+WHERE (population_estimate_2018 - population_census_2010) > 200000;
 
 ---- Phase 4: Use a JOIN operation ---------------------------------------------
 -- Retrieve rows from multiple tables joining on a foreign key.
@@ -185,7 +187,10 @@ WHERE (land_area_sq_mi_2016 > 400 AND population_estimate_2018 <= 2000000) OR
      airport names and city names only.
 */
 
--- your query here
+SELECT airports.name, cities.city
+FROM airports
+INNER JOIN cities ON airports.city_id = cities.id;
+
 
 \echo ========= Problem 4.2 ====================================================
 \echo
@@ -197,7 +202,12 @@ WHERE (land_area_sq_mi_2016 > 400 AND population_estimate_2018 <= 2000000) OR
       rows.)
 */
 
--- your query here
+SELECT COUNT(airports.name)
+FROM airports
+INNER JOIN cities ON airports.city_id = cities.id
+WHERE cities.city = 'New York';
+
+
 
 --------------------------------------------------------------------------------
 ---- Bonuses:
